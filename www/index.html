@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IT Credentials — Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="auth-bg">
+    <div style="position:absolute;top:1rem;right:1rem;z-index:10;">
+      <button id="theme-toggle" class="btn btn-ghost" title="Toggle theme" style="padding:0.5rem;">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="auth-logo-icon">
+          <img src="logo.png" alt="Logo">
+        </div>
+        <div class="auth-logo-text">
+          IT Credentials
+          <small>Secure Vault</small>
+        </div>
+      </div>
+
+      <div class="auth-heading">Welcome back</div>
+      <div class="auth-sub">Sign in to access your credentials vault</div>
+
+      <form id="loginForm" onsubmit="event.preventDefault(); login();">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="you@company.com" required autocomplete="username" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="input-group">
+            <input class="form-input" type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password" />
+            <button class="input-group-icon" type="button" onclick="togglePw('password', this)" tabindex="-1">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:0.65rem;font-size:0.9rem;margin-top:0.25rem;">
+          Sign In
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </button>
+      </form>
+
+      <div class="divider"></div>
+
+      <a class="auth-link" href="reset.html">Forgot your password? <span>Reset it</span></a>
+      <a class="auth-link" href="register.html">Don't have an account? <span>Create one</span></a>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="js/firebase.js"></script>
+  <script>
+    function togglePw(id, btn) {
+      const inp = document.getElementById(id);
+      const isHidden = inp.type === 'password';
+      inp.type = isHidden ? 'text' : 'password';
+      btn.innerHTML = isHidden
+        ? `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-7 0-11-7-11-7a18.77 18.77 0 015.17-5.58M9.88 9.88A3 3 0 0114.12 14.12M3 3l18 18"/></svg>`
+        : `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+    }
+  </script>
+</body>
+</html>

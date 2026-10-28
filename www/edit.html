@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IT Credentials — Edit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/styles.css?v=1.1" />
+</head>
+<body>
+  <div class="wrapper">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-icon">
+          <img src="logo.png" alt="Logo">
+        </div>
+        <div class="sidebar-brand-name">
+          IT Credentials
+          <span>Secure Vault</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Navigation</div>
+        <a href="dashboard.html">
+          <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+          Dashboard
+        </a>
+        <a href="add.html">
+          <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path stroke-linecap="round" d="M12 8v8m-4-4h8"/>
+          </svg>
+          Add Credential
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button onclick="firebase.auth().signOut().then(()=>window.location.href='index.html')" style="color:var(--red);display:flex;align-items:center;gap:0.6rem;width:100%;background:none;border:none;cursor:pointer;padding:0.55rem 0.75rem;border-radius:6px;font-size:0.83rem;font-weight:500;font-family:var(--font-body);">
+          <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1"/>
+          </svg>
+          Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div class="topbar">
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <button class="menu-toggle" aria-label="Toggle menu">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+          <div class="topbar-title">Edit Credential</div>
+        </div>
+        <div class="topbar-right">
+          <button id="theme-toggle" class="btn btn-ghost" title="Toggle theme">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="form-page">
+          <div class="form-page-card">
+            <div class="form-page-header">
+              <a href="dashboard.html" class="form-page-back" title="Back">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" d="M15 19l-7-7 7-7"/>
+                </svg>
+              </a>
+              <div>
+                <div class="form-page-title">Edit Credential</div>
+                <div class="form-page-subtitle" id="editDocId">Loading…</div>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label">Name <span style="color:var(--red)">*</span></label>
+                <input class="form-input" type="text" id="name" placeholder="e.g. John Smith" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Platform</label>
+                <input class="form-input" type="text" id="platform" placeholder="e.g. AWS, GitHub…" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Website / URL</label>
+              <input class="form-input" type="text" id="website" placeholder="https://example.com" />
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label">Username <span style="color:var(--red)">*</span></label>
+                <input class="form-input" type="text" id="username" placeholder="username" autocomplete="off" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Password <span style="color:var(--red)">*</span></label>
+                <div class="input-group">
+                  <input class="form-input" type="password" id="password" placeholder="••••••••" autocomplete="off" />
+                  <button class="input-group-icon" type="button" onclick="togglePw('password', this)" tabindex="-1">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label">Email <span style="color:var(--red)">*</span></label>
+                <input class="form-input" type="email" id="email" placeholder="user@example.com" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone</label>
+                <input class="form-input" type="text" id="phone" placeholder="+1 (555) 000-0000" />
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <a href="dashboard.html" class="btn btn-ghost">Cancel</a>
+              <button class="btn btn-primary" id="updateBtn">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M5 13l4 4L19 7"/></svg>
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="js/firebase.js"></script>
+</body>
+</html>
